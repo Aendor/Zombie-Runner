@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,30 +8,50 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float chaseRange;
-    [SerializeField] float stoppingDistance;
-
-    float distanceToTarget = Mathf.Infinity;
-
+    
     NavMeshAgent navMeshAgent;
+    float distanceToTarget = Mathf.Infinity;
+    bool isProvoked = false;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.stoppingDistance = stoppingDistance;
     }
-
     void Update()
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget <= chaseRange)
+        if (isProvoked)
         {
-            navMeshAgent.SetDestination(target.position);
+            EngageTarget();
         }
-        else
+        else if (distanceToTarget <= chaseRange)
         {
-            navMeshAgent.SetDestination(transform.position);
+            isProvoked = true;
         }
     }
+    private void EngageTarget()
+    {
+        if (distanceToTarget >= navMeshAgent.stoppingDistance)
+        {
+            ChaseTarget();
+        }
+
+        if (distanceToTarget <= navMeshAgent.stoppingDistance)
+        {
+            AttackTarget();
+        }
+    }
+
+    private void AttackTarget()
+    {
+        print("I kiel you!");
+    }
+
+    private void ChaseTarget()
+    {
+        navMeshAgent.SetDestination(target.position);
+    }
+
     void OnDrawGizmosSelected()
     {
         // Display the chase radius when selected
