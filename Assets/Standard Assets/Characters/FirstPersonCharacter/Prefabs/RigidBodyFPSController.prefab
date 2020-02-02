@@ -348,6 +348,8 @@ MonoBehaviour:
   range: 100
   damage: 30
   muzzleFlash: {fileID: 5487830941654638916}
+  hitEffect: {fileID: 313814616521196462, guid: caf08dab7c5e8354286391b1885a5334,
+    type: 3}
 --- !u!1001 &6975389659485452088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -429,6 +431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Carbine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489816023540214725, guid: ada2587319194f542957a8c2ae277cb9,
+        type: 3}
+      propertyPath: m_Name
+      value: Muzzle Flash VFX - Orange
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ada2587319194f542957a8c2ae277cb9, type: 3}
